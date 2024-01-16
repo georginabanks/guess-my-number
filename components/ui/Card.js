@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
 	container: {
 		alignItems: 'center',
 		padding: 16,
-		marginTop: 36,
+		marginTop: 12,
 		marginHorizontal: 24,
 		backgroundColor: colours.primaryDark,
 		borderRadius: 8,

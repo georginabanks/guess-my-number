@@ -32,7 +32,9 @@ export default function StartGameScreen({ onChosenNumber }) {
 	
 	return (
 			<View style={ styles.rootContainer }>
-				<Title>Guess My Number</Title>
+				<View style={ styles.title }>
+					<Title>Guess My Number</Title>
+				</View>
 				<Card>
 					<Subtitle>Enter a Number</Subtitle>
 					<TextInput style={ styles.numberInput } maxLength={ 2 } keyboardType={'number-pad'} value={ enteredNumber }
@@ -56,6 +58,9 @@ const styles = StyleSheet.create({
 		flex: 1,
 		marginTop: 100,
 		alignItems: 'center'
+	},
+	title: {
+		marginBottom: 24
 	},
 	numberInput: {
 		height: 50,

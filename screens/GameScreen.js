@@ -60,7 +60,9 @@ export default function GameScreen({ userNumber, handleGameOver }) {
 	return (
 			<View style={ styles.screen }>
 				<Title>Opponent's Guess</Title>
-				<NumberContainer>{ currentGuess }</NumberContainer>
+				<View style={ styles.numberContainer }>
+					<NumberContainer>{ currentGuess }</NumberContainer>
+				</View>
 				<Card>
 					<Subtitle style={ styles.subtitle }>Higher or lower?</Subtitle>
 					<View style={ styles.buttonContainer }>
@@ -90,8 +92,12 @@ export default function GameScreen({ userNumber, handleGameOver }) {
 
 const styles = StyleSheet.create({
 	screen: {
-		padding: 24,
+		marginTop: 100,
+		paddingHorizontal: 24,
 		flex: 1
+	},
+	numberContainer: {
+		marginTop: 16
 	},
 	subtitle: {
 		marginBottom: 12
