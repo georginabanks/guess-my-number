@@ -39,8 +39,12 @@ export default function StartGameScreen({ onChosenNumber }) {
 							   onChangeText={ handleInputNumber } />
 					
 					<View style={ styles.buttonContainer }>
+						<View style={ styles.button }>
 							<PrimaryButton onPress={ resetInputNumber }>Cancel</PrimaryButton>
+						</View>
+						<View style={ styles.button }>
 							<PrimaryButton onPress={ handleConfirm }>Confirm</PrimaryButton>
+						</View>
 					</View>
 				</Card>
 			</View>
@@ -66,5 +70,8 @@ const styles = StyleSheet.create({
 	},
 	buttonContainer: {
 		flexDirection: 'row'
+	},
+	button: {
+		flex: 1
 	}
 });

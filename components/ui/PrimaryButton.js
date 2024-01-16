@@ -14,7 +14,6 @@ export default function PrimaryButton({ children, onPress }) {
 
 const styles = StyleSheet.create({
 	outerContainer: {
-		flex: 1,
 		borderRadius: 28,
 		margin: 4,
 		overflow: 'hidden'

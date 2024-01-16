@@ -12,6 +12,7 @@ export default function Subtitle({ children, style }) {
 const styles = StyleSheet.create({
 	text: {
 		color: colours.secondary,
-		fontSize: 24
+		fontSize: 24,
+		fontFamily: 'open-sans'
 	}
 });

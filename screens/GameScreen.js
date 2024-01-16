@@ -56,12 +56,16 @@ export default function GameScreen({ userNumber, handleGameOver }) {
 				<Card>
 					<Subtitle style={ styles.subtitle }>Higher or lower?</Subtitle>
 					<View style={ styles.buttonContainer }>
-						<PrimaryButton onPress={ handleNextGuess.bind( this, 'lower') }>
-							<Ionicons name={'md-remove'} size={24} color={'white'} />
-						</PrimaryButton>
-						<PrimaryButton onPress={ handleNextGuess.bind( this, 'higher') }>
-							<Ionicons name={'md-add'} size={24} color={'white'} />
-						</PrimaryButton>
+						<View style={ styles.button }>
+							<PrimaryButton onPress={ handleNextGuess.bind( this, 'lower') }>
+								<Ionicons name={'md-remove'} size={24} color={'white'} />
+							</PrimaryButton>
+						</View>
+						<View style={ styles.button }>
+							<PrimaryButton onPress={ handleNextGuess.bind( this, 'higher') }>
+								<Ionicons name={'md-add'} size={24} color={'white'} />
+							</PrimaryButton>
+						</View>
 					</View>
 				</Card>
 				<View>
@@ -81,5 +85,8 @@ const styles = StyleSheet.create({
 	},
 	buttonContainer: {
 		flexDirection: 'row'
+	},
+	button: {
+		flex: 1
 	}
 })
