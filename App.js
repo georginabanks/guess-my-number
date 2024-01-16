@@ -5,19 +5,29 @@ import {StatusBar} from "expo-status-bar";
 import {useState} from "react";
 import GameScreen from "./screens/GameScreen";
 import colours from "./util/colours";
+import GameOverScreen from "./screens/GameOverScreen";
 
 export default function App() {
     
     const [userNumber, setUserNumber] = useState(undefined);
+    const [gameOver, setGameOver] = useState(true);
     
     function handleChosenNumber( chosenNumber ) {
         setUserNumber( chosenNumber );
     }
     
+    function handleGameOver() {
+        setGameOver(true);
+    }
+    
     let screen = <StartGameScreen onChosenNumber={ handleChosenNumber } />
     
     if ( userNumber ) {
-        screen = <GameScreen userNumber={ userNumber } />
+        screen = <GameScreen userNumber={ userNumber } handleGameOver={ handleGameOver } />
+    }
+    
+    if ( gameOver ) {
+        screen = <GameOverScreen />
     }
     
     return (
