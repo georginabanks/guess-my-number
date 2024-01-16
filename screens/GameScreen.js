@@ -1,8 +1,10 @@
-import {Alert, StyleSheet, Text, View} from "react-native";
+import {Alert, StyleSheet, View} from "react-native";
 import Title from "../components/ui/Title";
 import {useEffect, useState} from "react";
 import NumberContainer from "../components/game/NumberContainer";
 import PrimaryButton from "../components/ui/PrimaryButton";
+import Subtitle from "../components/ui/Subtitle";
+import Card from "../components/ui/Card";
 
 function generateRandomBetween( min, max, exclude ) {
 	const rndNum = Math.floor( Math.random() * ( max - min ) ) + min;
@@ -19,7 +21,7 @@ let max = 100;
 
 export default function GameScreen({ userNumber, handleGameOver }) {
 	
-	const initialGuess = generateRandomBetween( min, max, userNumber );
+	const initialGuess = generateRandomBetween( 1, 100, userNumber );
 	const [currentGuess, setCurrentGuess] = useState( initialGuess );
 	
 	useEffect(() => {
@@ -27,7 +29,7 @@ export default function GameScreen({ userNumber, handleGameOver }) {
 			handleGameOver();
 		}
 	}, [ currentGuess, userNumber, handleGameOver ]);
-	
+
 	function handleNextGuess( direction ) {
 		if (( direction === 'lower' && currentGuess < userNumber ) || ( direction === 'higher' && currentGuess > userNumber )) {
 			Alert.alert("Something's wrong!", 'You know what you did...', {
@@ -50,13 +52,13 @@ export default function GameScreen({ userNumber, handleGameOver }) {
 			<View style={ styles.screen }>
 				<Title>Opponent's Guess</Title>
 				<NumberContainer>{ currentGuess }</NumberContainer>
-				<View>
-					<Text>Higher or lower?</Text>
+				<Card>
+					<Subtitle style={ styles.subtitle }>Higher or lower?</Subtitle>
 					<View style={ styles.buttonContainer }>
 						<PrimaryButton onPress={ handleNextGuess.bind( this, 'lower') }>-</PrimaryButton>
 						<PrimaryButton onPress={ handleNextGuess.bind( this, 'higher') }>+</PrimaryButton>
 					</View>
-				</View>
+				</Card>
 				<View>
 					{/*log rounds*/}
 				</View>
@@ -68,6 +70,9 @@ const styles = StyleSheet.create({
 	screen: {
 		padding: 24,
 		flex: 1
+	},
+	subtitle: {
+		marginBottom: 12
 	},
 	buttonContainer: {
 		flexDirection: 'row'

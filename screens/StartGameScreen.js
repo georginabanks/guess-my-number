@@ -2,6 +2,9 @@ import PrimaryButton from "../components/ui/PrimaryButton";
 import {Alert, StyleSheet, TextInput, View} from 'react-native';
 import {useState} from "react";
 import colours from "../util/colours";
+import Title from "../components/ui/Title";
+import Card from "../components/ui/Card";
+import Subtitle from "../components/ui/Subtitle";
 
 export default function StartGameScreen({ onChosenNumber }) {
 	
@@ -28,37 +31,29 @@ export default function StartGameScreen({ onChosenNumber }) {
 	}
 	
 	return (
-			<View style={ styles.inputContainer }>
-				<TextInput style={ styles.input } maxLength={ 2 } keyboardType={'number-pad'} value={ enteredNumber }
-						   onChangeText={ handleInputNumber } />
-				
-				<View style={ styles.buttonContainer }>
-					<View style={ styles.button }>
-						<PrimaryButton onPress={ resetInputNumber }>Cancel</PrimaryButton>
+			<View style={ styles.rootContainer }>
+				<Title>Guess My Number</Title>
+				<Card>
+					<Subtitle>Enter a Number</Subtitle>
+					<TextInput style={ styles.numberInput } maxLength={ 2 } keyboardType={'number-pad'} value={ enteredNumber }
+							   onChangeText={ handleInputNumber } />
+					
+					<View style={ styles.buttonContainer }>
+							<PrimaryButton onPress={ resetInputNumber }>Cancel</PrimaryButton>
+							<PrimaryButton onPress={ handleConfirm }>Confirm</PrimaryButton>
 					</View>
-					<View style={ styles.button }>
-						<PrimaryButton onPress={ handleConfirm }>Confirm</PrimaryButton>
-					</View>
-				</View>
+				</Card>
 			</View>
 	)
 }
 
 const styles = StyleSheet.create({
-	inputContainer: {
-		alignItems: 'center',
-		padding: 16,
+	rootContainer: {
+		flex: 1,
 		marginTop: 100,
-		marginHorizontal: 24,
-		backgroundColor: colours.primaryDark,
-		borderRadius: 8,
-		elevation: 4,
-		shadowColor: 'black',
-		shadowOffset: { width: 0, height: 2 },
-		shadowRadius: 6,
-		shadowOpacity: 0.25
+		alignItems: 'center'
 	},
-	input: {
+	numberInput: {
 		height: 50,
 		width: 50,
 		fontSize: 32,
@@ -71,8 +66,5 @@ const styles = StyleSheet.create({
 	},
 	buttonContainer: {
 		flexDirection: 'row'
-	},
-	button: {
-		flex: 1
 	}
 });

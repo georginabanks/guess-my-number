@@ -10,7 +10,7 @@ import GameOverScreen from "./screens/GameOverScreen";
 export default function App() {
     
     const [userNumber, setUserNumber] = useState(undefined);
-    const [gameOver, setGameOver] = useState(true);
+    const [gameOver, setGameOver] = useState(false);
     
     function handleChosenNumber( chosenNumber ) {
         setUserNumber( chosenNumber );
@@ -26,7 +26,7 @@ export default function App() {
         screen = <GameScreen userNumber={ userNumber } handleGameOver={ handleGameOver } />
     }
     
-    if ( gameOver ) {
+    if ( gameOver && userNumber ) {
         screen = <GameOverScreen />
     }
     
