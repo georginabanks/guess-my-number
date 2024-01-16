@@ -40,8 +40,9 @@ export default function App() {
         setGameOver(false);
     }
     
-    function handleGameOver() {
+    function handleGameOver( numOfRounds ) {
         setGameOver(true);
+        setRounds(numOfRounds);
     }
     
     function handleStartNewGame() {

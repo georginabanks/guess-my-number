@@ -1,4 +1,4 @@
-import {Alert, StyleSheet, View} from "react-native";
+import {Alert, FlatList, StyleSheet, View, Text, ScrollView} from "react-native";
 import Title from "../components/ui/Title";
 import {useEffect, useState} from "react";
 import NumberContainer from "../components/game/NumberContainer";
@@ -6,6 +6,7 @@ import PrimaryButton from "../components/ui/PrimaryButton";
 import Subtitle from "../components/ui/Subtitle";
 import Card from "../components/ui/Card";
 import { Ionicons } from "@expo/vector-icons";
+import LogItem from "../components/game/LogItem";
 
 function generateRandomBetween( min, max, exclude ) {
 	const rndNum = Math.floor( Math.random() * ( max - min ) ) + min;
@@ -24,12 +25,18 @@ export default function GameScreen({ userNumber, handleGameOver }) {
 	
 	const initialGuess = generateRandomBetween( 1, 100, userNumber );
 	const [currentGuess, setCurrentGuess] = useState( initialGuess );
+	const [rounds, setRounds] = useState([]);
 	
 	useEffect(() => {
 		if ( currentGuess === userNumber ) {
-			handleGameOver();
+			handleGameOver( rounds[-1] );
 		}
 	}, [ currentGuess, userNumber, handleGameOver ]);
+	
+	useEffect(() => {
+		min = 1;
+		max = 100;
+	}, []);
 
 	function handleNextGuess( direction ) {
 		if (( direction === 'lower' && currentGuess < userNumber ) || ( direction === 'higher' && currentGuess > userNumber )) {
@@ -46,6 +53,7 @@ export default function GameScreen({ userNumber, handleGameOver }) {
 		}
 		
 		const newNumber = generateRandomBetween( min, max, currentGuess );
+		setRounds([ ...rounds, newNumber ]);
 		setCurrentGuess( newNumber );
 	}
 	
@@ -68,8 +76,13 @@ export default function GameScreen({ userNumber, handleGameOver }) {
 						</View>
 					</View>
 				</Card>
-				<View>
-					{/*log rounds*/}
+				<View style={ styles.roundsContainer }>
+					<FlatList data={ rounds }
+							  renderItem={( itemData ) => {
+								  return <LogItem guess={itemData.item} round={( rounds.length - itemData.index )}/>
+							  }}
+							  keyExtractor={(item) => item}
+					/>
 				</View>
 			</View>
 	)
@@ -88,5 +101,9 @@ const styles = StyleSheet.create({
 	},
 	button: {
 		flex: 1
+	},
+	roundsContainer: {
+		flex: 1,
+		padding: 20
 	}
 })
